@@ -5,13 +5,10 @@
     <title>Get User by id</title>
 </head>
 <body>
-    <div th:each="user : ${user}">
-        <a th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getName()}"> User </a>
-    </div>
+<p th:text="${user.getId()}"> VALUE </p>
+<p th:text="${user.getName() + ', ' + user.getLastName() + ', ' + user.getEmail()}"> VALUE </p>
 
-    <br/>
-
-    <a th:href="@{/user}"> Show all users </a>
+<a th:href="@{/user/{id}/edit(id=${user.getId()})}"> Edit user </a>
 
 </body>
 </html>
