@@ -5,10 +5,16 @@
     <title>Get User by id</title>
 </head>
 <body>
+
 <p th:text="${user.getId()}"> VALUE </p>
 <p th:text="${user.getName() + ', ' + user.getLastName() + ', ' + user.getEmail()}"> VALUE </p>
 
-<a th:href="@{/user/{id}/edit(id=${user.getId()})}"> Edit user </a>
+<a th:href="@{/admin/user/{id}/edit(id=${user.getId()})}"> Edit user </a>
+
+<br/>
+
+<title> If you are not the admin, press this link:</title>
+<a th:href="@{/user/welcome}"> Exit </a>
 
 </body>
 </html>

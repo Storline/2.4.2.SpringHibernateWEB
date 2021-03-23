@@ -5,7 +5,9 @@
     <title>Update User</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/user/{id}(id=${editUser.getId()})}" th:object="${editUser}">
+
+<form th:method="PATCH" th:action="@{/admin/user/{id}/edit(id=${editUser.getId()})}" th:object="${editUser}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <label for="name"> Name: </label>
     <input type="text" th:field="*{name}" id="name"/>
 
@@ -26,7 +28,8 @@
 
 <br/>
 
-<form th:method="DELETE" th:action="@{/user/{id}(id=${editUser.getId()})}">
+<form th:method="DELETE" th:action="@{/admin/user/{id}/edit(id=${editUser.getId()})}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Delete"/>
 </form>
 

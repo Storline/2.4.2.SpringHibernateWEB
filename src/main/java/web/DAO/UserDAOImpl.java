@@ -47,4 +47,10 @@ public class UserDAOImpl implements UserDAO {
         userToBeUpdated.setEmail(updatedUser.getEmail());
         em.merge(userToBeUpdated);
     }
+
+    @Override
+    public User findByUsername(String username){
+        return (User) em.createQuery("from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username).getSingleResult();
+    }
+
 }

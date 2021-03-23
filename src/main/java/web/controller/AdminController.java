@@ -10,10 +10,15 @@ import web.service.UserService;
 
 
 @Controller
-@RequestMapping(value = "/user")
-public class UsersController {
+@RequestMapping("/admin")
+public class AdminController {
 
     private UserService userService;
+
+    @GetMapping("/welcome")
+    public String hello(){
+        return "welcome";
+    }
 
     @Autowired
     @Qualifier(value = "userService")
@@ -24,42 +29,42 @@ public class UsersController {
     @GetMapping(value ="/new")
     public String newUserForm(Model model){
         model.addAttribute("newuser", new User());
-        return "users/adduser";
+        return "adduser";
     }
 
     @PostMapping()
     public String addUser(@ModelAttribute("newuser") User user){
         userService.saveUser(user);
-        return "redirect:/user";
+        return "redirect:/admin";
     }
 
     @GetMapping()
     public String listUsers(Model model){
         model.addAttribute("users", userService.getAllUsers());
-        return "users/users";
+        return "admin";
     }
 
-    @GetMapping(value = "/{id}/edit")
+    @GetMapping(value = "/user/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id){
         model.addAttribute("editUser", userService.getUserById(id));
-        return "/users/edituser";
+        return "edituser";
     }
 
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("updateUser") User user, @PathVariable("id") Long id){
+    @PatchMapping("/user/{id}/edit?{id}")
+    public String updateUser(@ModelAttribute("editUser") User user, @PathVariable("id") Long id){
         userService.updateUser(id, user);
-        return "redirect:/user";
+        return "redirect:/admin";
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/user/{id}")
     public String getUserById(@PathVariable("id") Long id, Model model) {
         model.addAttribute(userService.getUserById(id));
-        return "users/getuserbyid";
+        return "getuserbyid";
      }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}/delete?{id}")
     public String removeUser(@PathVariable("id") Long id){
         userService.removeUserById(id);
-        return "redirect:/user";
+        return "redirect:/admin";
     }
 }
