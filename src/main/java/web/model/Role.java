@@ -14,9 +14,6 @@ public class Role implements GrantedAuthority {
 
     private String role;
 
-    @ManyToMany
-    private Set<User> users;
-
     public Role(Long id, String role){
         this.id = id;
         this.role = role;
@@ -38,14 +35,6 @@ public class Role implements GrantedAuthority {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override
