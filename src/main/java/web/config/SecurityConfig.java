@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/user/**").authenticated()
+                .antMatchers("/admin/**").authenticated()
                 .and()
                 .formLogin()
                 .successHandler(loginSuccessHandler)
@@ -59,9 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 // защищенные URL
                 .antMatchers(HttpMethod.GET, "/user/**").access("hasAnyRole('ADMIN', 'USER')")
-                .antMatchers(HttpMethod.GET, "/user/{id}/**").access("hasAnyRole('ADMIN', 'USER')")
-                .antMatchers(HttpMethod.POST, "/admin/{id}/**").access("hasRole('ADMIN')")
-                .antMatchers(HttpMethod.DELETE, "/admin/{id}/**").access("hasRole('ADMIN')")
+                .antMatchers(HttpMethod.POST, "/admin/**").access("hasRole('ADMIN')")
+                .antMatchers(HttpMethod.POST, "/user/**").access("hasRole('ADMIN')")
                 .anyRequest()
                 .authenticated();
     }

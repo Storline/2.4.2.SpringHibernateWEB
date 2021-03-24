@@ -20,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/welcome")
-    public String hello(){
-        return "welcome";
-    }
+//    @GetMapping("/welcome")
+//    public String hello(){
+//        return "welcome";
+//    }
 
-    @GetMapping("/users")
+    @GetMapping()
     public String listUsers(Model model){
         model.addAttribute("users", userService.getAllUsers());
         return "users";

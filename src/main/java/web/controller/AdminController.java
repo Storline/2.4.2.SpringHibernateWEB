@@ -15,10 +15,10 @@ public class AdminController {
 
     private UserService userService;
 
-    @GetMapping("/welcome")
-    public String hello(){
-        return "welcome";
-    }
+//    @GetMapping("/welcome")
+//    public String hello(){
+//        return "welcome";
+//    }
 
     @Autowired
     @Qualifier(value = "userService")

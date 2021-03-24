@@ -27,10 +27,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void removeUserById(Long id) {
-        User user = em.find(User.class, id);
-        if (user != null) {
-            em.remove(user);
-        }
+        em.createQuery("delete from User user where user.id = :id")
+                .setParameter("id", id).executeUpdate();
     }
 
     @Override
