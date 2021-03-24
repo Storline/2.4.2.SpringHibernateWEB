@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome page</title>
+</head>
+<body>
+    <title> New User: </title>
+    <a th:href="@{/admin/new}"> Create new User </a>
+
+    <br/>
+
+    <title> Get all users: </title>
+    <a th:href="@{/admin}"> List for admin</a>
+
+    <br/>
+
+    <title> Get all users: </title>
+    <a th:href="@{/user/users}"> List for users </a>
+
+    <br/>
+
+    <title> Logout: </title>
+    <a th:href="@{/logout}"> Good Bye! </a>
+</body>
+</html>
