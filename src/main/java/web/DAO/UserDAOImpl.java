@@ -6,6 +6,7 @@ import web.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -33,6 +34,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
+        //join fetch, чтобы выводить роли
         return em.createQuery("select u from User u", User.class).getResultList();
     }
 
@@ -46,8 +48,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findByUsername(String username){
-        return (User) em.createQuery("from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username).getSingleResult();
+    @SuppressWarnings("unchecked")
+    public Optional<User> findByUsername(String username){
+        return (Optional<User>)em.createQuery("from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username)
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 
 }

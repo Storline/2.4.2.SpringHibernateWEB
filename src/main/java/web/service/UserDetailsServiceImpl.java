@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
+import java.util.Optional;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -18,10 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
-        if (user == null){
+        Optional<User> oUser = userService.findByUsername(username);
+        if (!oUser.isPresent()){
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
-        return userService.findByUsername(username);
+        return oUser.get();
     }
 }

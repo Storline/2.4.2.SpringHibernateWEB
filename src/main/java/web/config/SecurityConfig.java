@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,8 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .and()
-                .formLogin()
+                .formLogin().loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
                 .successHandler(loginSuccessHandler)
+                .permitAll()
                 .and()
                 .csrf().disable();
 
@@ -59,11 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers(HttpMethod.GET, "/user/**").access("hasAnyRole('ADMIN', 'USER')")
-                .antMatchers(HttpMethod.POST, "/admin/**").access("hasRole('ADMIN')")
-                .antMatchers(HttpMethod.POST, "/user/**").access("hasRole('ADMIN')")
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/user").access("hasAnyRole('ADMIN', 'USER')")
+                .antMatchers( "/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/user/{id}/**").access("hasRole('ADMIN')")
+                .anyRequest().authenticated();
     }
 
 
@@ -81,4 +83,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
+
 }

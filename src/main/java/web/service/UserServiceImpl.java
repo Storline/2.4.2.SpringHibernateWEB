@@ -6,6 +6,7 @@ import web.DAO.UserDAO;
 import web.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 @Transactional(readOnly = true)
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User findByUsername(String username){
+    public Optional<User> findByUsername(String username){
         return service.findByUsername(username);
     }
 

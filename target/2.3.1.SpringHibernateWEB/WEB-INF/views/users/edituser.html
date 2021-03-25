@@ -28,7 +28,7 @@
 
 <br/>
 
-<form th:method="POST" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}">
+<form th:method="POST" th:action="@{/admin/user/{id}/delete(id=${user.getId()})}">
 <!--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
     <input type="submit" value="Delete"/>
 </form>
