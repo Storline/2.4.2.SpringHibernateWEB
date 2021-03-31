@@ -15,20 +15,9 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    @Qualifier(value = "userService")
+    @Qualifier(value = "userServiceImpl")
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-//    @GetMapping("/welcome")
-//    public String hello(){
-//        return "welcome";
-//    }
-
-    @GetMapping()
-    public String listUsers(Model model){
-        model.addAttribute("users", userService.getAllUsers());
-        return "users";
     }
 
     @GetMapping(value = "/{id}")

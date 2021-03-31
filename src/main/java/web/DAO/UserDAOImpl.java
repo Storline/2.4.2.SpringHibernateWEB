@@ -16,9 +16,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUserById(Long id) {
-        User user = em.find(User.class, id);
-        em.detach(user);
-        return user;
+        return em.find(User.class, id);
     }
 
     @Override
@@ -35,16 +33,12 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> getAllUsers() {
         //join fetch, чтобы выводить роли
-        return em.createQuery("select u from User u", User.class).getResultList();
+        return em.createQuery("select u from User u inner join fetch u.roles as roles", User.class).getResultList();
     }
 
     @Override
     public void updateUser(Long id, User updatedUser) {
-        User userToBeUpdated = getUserById(id);
-        userToBeUpdated.setName(updatedUser.getName());
-        userToBeUpdated.setLastName(updatedUser.getLastName());
-        userToBeUpdated.setEmail(updatedUser.getEmail());
-        em.merge(userToBeUpdated);
+        em.merge(updatedUser);
     }
 
     @Override

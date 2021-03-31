@@ -15,13 +15,8 @@ public class AdminController {
 
     private UserService userService;
 
-//    @GetMapping("/welcome")
-//    public String hello(){
-//        return "welcome";
-//    }
-
     @Autowired
-    @Qualifier(value = "userService")
+    @Qualifier(value = "userServiceImpl")
     public void setUserService(UserService userService) {
         this.userService = userService;
     }

@@ -7,7 +7,7 @@
 <body>
 
 <form th:method="POST" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}" th:object="${user}">
-<!--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+
     <label for="name"> Name: </label>
     <input type="text" th:field="*{name}" id="name"/>
 
@@ -20,6 +20,21 @@
 
     <label for="email"> Email: </label>
     <input type="text" th:field="*{email}" id="email">
+
+    <br/>
+
+    <label for="username"> Username: </label>
+    <input type="text" th:field="*{username}" id="username">
+
+    <br/>
+
+    <label for="password"> Password: </label>
+    <input type="text" th:field="*{password}" id="password">
+
+    <br/>
+
+    <label for="role"> Role: </label>
+    <input type="text" th:field="*{roles}" id="role">
 
     <br/>
 
