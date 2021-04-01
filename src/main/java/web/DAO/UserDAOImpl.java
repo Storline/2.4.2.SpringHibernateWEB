@@ -32,7 +32,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        //join fetch, чтобы выводить роли
         return em.createQuery("select u from User u inner join fetch u.roles as roles", User.class).getResultList();
     }
 
@@ -44,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     @SuppressWarnings("unchecked")
     public Optional<User> findByUsername(String username){
-        return (Optional<User>)em.createQuery("from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username)
+        return (Optional<User>)em.createQuery("select user from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username)
                 .getResultList()
                 .stream()
                 .findFirst();

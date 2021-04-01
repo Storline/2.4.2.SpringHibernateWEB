@@ -78,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return authenticationProvider;
     }
+    
 
     @Bean
     public NoOpPasswordEncoder passwordEncoder() {

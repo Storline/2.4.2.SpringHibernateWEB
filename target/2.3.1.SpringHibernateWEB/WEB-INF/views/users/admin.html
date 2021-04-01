@@ -14,6 +14,7 @@
         <th>email</th>
         <th>Username</th>
         <th>Password</th>
+        <th>Role</th>
     </tr>
 
     <tr th:each="user :${users}">
@@ -23,9 +24,16 @@
         <td th:utext="${user.getEmail()}">Email</td>
         <td th:utext="${user.getUsername()}">Username</td>
         <td th:utext="${user.getPassword()}">Password</td>
-        <td th:utext="${user.getRoles()}">Role</td>
+
+        <td th:text="${user.getRoles()}"> Role </td>
+
+<!--        <th:block th:each="role:${roles}">-->
+<!--            <li th:utext="${role}"> Role</li>-->
+<!--        </th:block>-->
+
         <td> <a th:href="@{/admin/user/{id}(id=${user.getId()})}"> Get user</a></td>
     </tr>
+
 </table>
 
 <br/>

@@ -5,11 +5,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import web.model.User;
 import web.service.UserService;
+
+import java.security.Principal;
+import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("")
 public class UserController {
 
     private UserService userService;
@@ -20,10 +24,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/{id}")
-    public String getUserById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute(userService.getUserById(id));
-        return "getuserbyid";
+//    @GetMapping(value = "/{id}")
+//    public String getUserById(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute(userService.getUserById(id));
+//        return "getuserbyid";
+//    }
+
+    @GetMapping("/id")
+    public String showUser(Principal principal, Model model) {
+        Optional<User> username = userService.findByUsername(principal.getName());
+        model.addAttribute("user", username);
+        return "users";
     }
 
 }

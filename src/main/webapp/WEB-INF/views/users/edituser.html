@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}" th:object="${user}" >
 
     <label for="name"> Name: </label>
     <input type="text" th:field="*{name}" id="name"/>
@@ -33,10 +33,10 @@
 
     <br/>
 
-    <label for="role"> Role: </label>
-    <input type="text" th:field="*{roles}" id="role">
+<!--    <label for="role"> Role: </label>-->
+<!--    <input type="text" th:field="*{roles}" id="role">-->
 
-    <br/>
+<!--    <br/>-->
 
     <input type="submit" value="Update User"/>
 </form>
@@ -44,7 +44,6 @@
 <br/>
 
 <form th:method="POST" th:action="@{/admin/user/{id}/delete(id=${user.getId()})}">
-<!--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
     <input type="submit" value="Delete"/>
 </form>
 
