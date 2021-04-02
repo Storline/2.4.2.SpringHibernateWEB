@@ -41,12 +41,10 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public Optional<User> findByUsername(String username){
-        return (Optional<User>)em.createQuery("select user from User user inner join fetch user.roles as roles where user.username = :username").setParameter("username", username)
-                .getResultList()
-                .stream()
-                .findFirst();
+    public User findByUsername(String username){
+        return (User) em.createQuery("select user from User user inner join fetch user.roles as roles where user.username =:username")
+                .setParameter("username", username)
+                .getSingleResult();
     }
 
 }

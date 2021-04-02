@@ -24,11 +24,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> oUser = service.findByUsername(username);
-        if (!oUser.isPresent()){
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        return oUser.get();
+        return service.findByUsername(username);
     }
 
     @Override
@@ -37,9 +33,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Optional<User> findByUsername(String username){
-        return service.findByUsername(username);
-    }
+    public User findByUsername(String username){return service.findByUsername(username);}
 
     @Override
     @Transactional

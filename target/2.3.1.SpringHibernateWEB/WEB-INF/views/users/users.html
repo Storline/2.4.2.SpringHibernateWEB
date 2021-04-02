@@ -15,12 +15,11 @@
             <th>email</th>
         </tr>
 
-        <tr th:each="user :${users}">
-            <td th:utext="${user.getId()}">Id</td>
-            <td th:utext="${user.getName()}">Name</td>
-            <td th:utext="${user.getLastName()}">Last name</td>
-            <td th:utext="${user.getEmail()}">Email</td>
-            <td> <a th:href="@{/user/{id}(id=${user.getId()})}"> Get user</a></td>
+        <tr>
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getName()}">Name</td>
+            <td th:text="${user.getLastName()}">Last name</td>
+            <td th:text="${user.getEmail()}">Email</td>
         </tr>
     </table>
 
