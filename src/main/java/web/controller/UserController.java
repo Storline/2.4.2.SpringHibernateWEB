@@ -9,6 +9,7 @@ import web.model.User;
 import web.service.UserService;
 
 import java.security.Principal;
+import java.util.Optional;
 
 
 @Controller
@@ -25,7 +26,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String showUser(Principal principal, Model model) {
-        User username = userService.findByUsername(principal.getName());
+        Optional<User> username = userService.findByUsername(principal.getName());
         model.addAttribute("user", username);
         return "users";
     }

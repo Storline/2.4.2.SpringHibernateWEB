@@ -6,14 +6,13 @@
 </head>
 <body>
 
-<p th:text="${user.getId()}"> VALUE </p>
-<p th:text="${user.getName() + ', ' + user.getLastName() + ', ' + user.getEmail()}"> VALUE </p>
+<td th:text="${user.getName() + ', ' + user.getLastName() + ', ' + user.getEmail()}"> VALUE </td>
 
 <a th:href="@{/admin/user/{id}/edit(id=${user.getId()})}"> Edit user </a>
 
 <br/>
 
-<title> If you are not the admin, press this link:</title>
+<p> If you are not the admin, press this link:</p>
 <a th:href="@{/user}"> Exit </a>
 
 </body>

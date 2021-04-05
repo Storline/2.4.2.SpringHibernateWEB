@@ -21,8 +21,11 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DBConfig {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
+
+    public DBConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource getDataSource() {

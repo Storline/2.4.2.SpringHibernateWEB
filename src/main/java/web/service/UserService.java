@@ -2,6 +2,7 @@ package web.service;
 
 import web.model.User;
 
+import javax.management.relation.Role;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,5 +18,9 @@ public interface UserService  {
 
     void updateUser(Long id, User updatedUser);
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
+
+    List<Role> getRoleList();
+
+    Role getRole(String role);
 }

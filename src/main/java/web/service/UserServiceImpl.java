@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.DAO.UserDAO;
 import web.model.User;
 
+import javax.management.relation.Role;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return service.findByUsername(username);
+        User user = findByUsername(username).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", username)));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 
     @Override
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findByUsername(String username){return service.findByUsername(username);}
+    public Optional<User> findByUsername(String username){return service.findByUsername(username);}
 
     @Override
     @Transactional
@@ -56,6 +58,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void updateUser(Long id, User updatedUser) {
         service.updateUser(id, updatedUser);
+    }
+
+    @Override
+    public List<Role> getRoleList() {
+        return null;
+    }
+
+    @Override
+    public Role getRole(String role) {
+        return null;
     }
 
 }

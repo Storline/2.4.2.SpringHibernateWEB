@@ -3,6 +3,7 @@ package web.DAO;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
+import javax.management.relation.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -32,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        return em.createQuery("select u from User u inner join fetch u.roles as roles", User.class).getResultList();
+        return em.createQuery("select u from User u left join fetch u.roles as roles", User.class).getResultList();
     }
 
     @Override
@@ -40,11 +41,24 @@ public class UserDAOImpl implements UserDAO {
         em.merge(updatedUser);
     }
 
+
     @Override
-    public User findByUsername(String username){
-        return (User) em.createQuery("select user from User user inner join fetch user.roles as roles where user.username =:username")
-                .setParameter("username", username)
-                .getSingleResult();
+    @SuppressWarnings("unchecked")
+    public Optional<User> findByUsername(String username){
+        return (Optional<User>)em.createQuery("select user from User user where user.username = :username").setParameter("username", username)
+                .getResultList()
+                .stream()
+                .findFirst();
+    }
+
+    @Override
+    public List<Role> getRoleList(){
+        return null;
+    }
+
+    @Override
+    public Role getRole(String role){
+        return null;
     }
 
 }

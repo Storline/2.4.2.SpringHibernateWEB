@@ -16,10 +16,10 @@
         </tr>
 
         <tr>
-            <td th:text="${user.getId()}">Id</td>
-            <td th:text="${user.getName()}">Name</td>
-            <td th:text="${user.getLastName()}">Last name</td>
-            <td th:text="${user.getEmail()}">Email</td>
+            <td th:text="${user.get().getId()}">Id</td>
+            <td th:text="${user.get().getName()}">Name</td>
+            <td th:text="${user.get().getLastName()}">Last Name</td>
+            <td th:text="${user.get().getEmail()}">Email</td>
         </tr>
     </table>
 
