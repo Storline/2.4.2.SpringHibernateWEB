@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:db.properties")
+@PropertySource(value = "classpath:db.properties", encoding = "UTF-8")
 @EnableTransactionManagement
 public class DBConfig {
 
@@ -41,6 +41,7 @@ public class DBConfig {
         props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        props.setProperty("hibernate.connection.characterEncoding", env.getProperty("hibernate.connection.characterEncoding"));
         return props;
     }
 

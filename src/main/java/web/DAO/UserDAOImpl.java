@@ -43,12 +43,12 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    @SuppressWarnings("unchecked")
+    //Вдальнейшем, может потребоваться обработка в try-catch, но это не точно. Пока что - полет нормальный
     public Optional<User> findByUsername(String username){
-        return (Optional<User>)em.createQuery("select user from User user where user.username = :username").setParameter("username", username)
-                .getResultList()
-                .stream()
-                .findFirst();
+        User user =  (User) em.createQuery("select user from User user where user.username = :username")
+                .setParameter("username", username)
+                .getSingleResult();
+        return Optional.ofNullable(user);
     }
 
     @Override
